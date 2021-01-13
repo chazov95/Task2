@@ -10,29 +10,29 @@
 <body>
 <?php
 $taskName = $_COOKIE['taskName'];
-$key = 0;
 ?>
 <form action="saveTask.php" method="post">
 
-<input  type="text" name="taskName" placeholder="Название задачи" value="<?php echo "$taskName"?>"> <br>
+<input  type="text" name="taskName" placeholder="Введите название задачи" value="<?php echo "$taskName"?>"> <br>
 
 
-Добавить подзадачу
-<button type="submit"> +</button> <br>
     <?php
     $tasks = unserialize($_COOKIE['task']);
-    foreach ($tasks as $task) {
+    foreach ($tasks as $key => $task) {
 
-        echo ++$key,'.  ', $task; ?>
+        echo $key+1,'.  ', $tasks[$key]['Body'], '   ', $tasks[$key]['Time'] ?>
+        <button type="button" onclick="document.location='delTask.php?taskId=<?= $key ?>'">Удалить</button>
         <br>
-        <button onclick="document.location='del.php?taskId=<?= $key ?>'">Удалить</button>
     <?php
     }
     ?>
-    <input  type="text" name="task" placeholder="Новая задача" value=""> <br>
-    <button type="submit">Сохранить задачу</button>
-<button type="button" onclick="document.location = 'taskClear.php'">Новая задача</button>
-<button type="button">Сохранить в файл</button>
+    <br>
+    <input  type="text" name="task" placeholder="Введите подпункт задачи" value="">
+    <input  type="text" name="time" placeholder="00:00" value=""> <br>
+    <button type="submit">Сохранить</button>
+
+<button type="button" onclick="document.location = 'taskClear.php'">Отчистить</button>
+<button type="button" onclick="document.location = 'saveToFile.php'">Сохранить в файл </button>
 </form>
 </body>
 </html>

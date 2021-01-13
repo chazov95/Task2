@@ -11,14 +11,18 @@ setcookie('taskName',$taskName);
     if (is_array($cookieTasks)) {
         $tasks = $cookieTasks;
     }
-    $newTask =
-         $_POST['task'];
+    if (preg_match("/^[0-9]{2}:[0-9]{2}$/", $_POST['time'])) {
+        $newTask = [
+            'Body' => $_POST['task'],
+            'Time' => $_POST['time']
+        ];
 
-    array_push($tasks, $newTask);
-    var_dump($tasks);
+        array_push($tasks, $newTask);
+        var_dump($tasks);
 
-    $serTasks = serialize($tasks);
-    setcookie('task', $serTasks);
-    print_r(unserialize($_COOKIE['task']));
+        $serTasks = serialize($tasks);
+        setcookie('task', $serTasks);
+    }
+
     header('Location: /');
 }
