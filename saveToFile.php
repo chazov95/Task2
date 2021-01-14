@@ -1,8 +1,11 @@
 <?php
 $filename = 'taskList.txt';
-$tasks = unserialize($_COOKIE['task']);
-$file = fopen($filename, "w");
 
+$tasks = unserialize($_COOKIE['task']);
+
+$times = unserialize($_COOKIE['time']);
+
+$file = fopen($filename, "w");
 $title =
 '+----+-------+----------------------------------------------------------------------+
 |								    '.$_COOKIE['taskName'].'                                          |
@@ -12,7 +15,7 @@ $title =
 fwrite($file,$title);
 
 foreach ($tasks as $key => $task) {
-$newTask = "\n".'| '.$key.' | '.$tasks[$key]['Time'].' | ____________________'.$tasks[$key]['Body'].'_______________________________ |
+$newTask = "\n".'| '.$key.' | '.$times[$key][$key].' | ____________________'.$task[0].'_______________________________ |
 +----+-------+----------------------------------------------------------------------+';
     fwrite($file,$newTask);
 }
