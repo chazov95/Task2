@@ -1,7 +1,7 @@
 <?php
 $filename = 'taskList.txt';
 $tasks = unserialize($_COOKIE['task']);
-$file = fopen($filename, w);
+$file = fopen($filename, "w");
 
 $title =
 '+----+-------+----------------------------------------------------------------------+
